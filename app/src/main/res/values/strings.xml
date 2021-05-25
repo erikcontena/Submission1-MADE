@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Submission1</string>
+
+    <string name="title">Title Example</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="progress">15%</string>
+    <string name="progress_update">%s%%</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="image_banner">Image Banner</string>
+    <string name="overview">Overview</string>
+    <string name="user_score">User Score</string>
+    <string name="back_button">Back Button</string>
+    <string name="app_logo">App Logo</string>
+    <string name="welcome">Welcome !</string>
+    <string name="movie">Movie</string>
+    <string name="terjadi_kesalahan">Terjadi Kesalahan</string>
+    <string name="favorite">Favorite</string>
+    <string name="empty">Data Kosong</string>
+    <string name="original">Original</string>
+    <string name="random">Random</string>
+    <string name="filter">filter</string>
+    <string name="title_favorite">Favorite</string>
+</resources>
