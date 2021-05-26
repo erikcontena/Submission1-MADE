@@ -13,9 +13,11 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application>
+    <application android:allowBackup="true"
+        android:fullBackupContent="true">
         <activity android:name=".FavoriteActivity"
-            android:parentActivityName="com.contena.submission1.ui.home.HomeActivity">
+            android:parentActivityName="com.contena.submission1.ui.home.HomeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>

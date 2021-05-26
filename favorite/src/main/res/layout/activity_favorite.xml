@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey_600"
+    android:background="@android:color/transparent"
     tools:context=".FavoriteActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:background="@drawable/tabs"
+        android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:layout_height="wrap_content">
+        android:background="@drawable/tabs">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
@@ -38,8 +38,8 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
-        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,7 +8,9 @@ import com.contena.core.data.source.local.room.CatalogDatabase
 import com.contena.core.data.source.remote.RemoteDataSource
 import com.contena.core.data.source.remote.network.ApiService
 import com.contena.core.domain.repository.IMainRepository
-import com.contena.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -22,21 +24,30 @@ val databaseModule = module {
         get<CatalogDatabase>().catalogDao()
     }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("contena".toCharArray())
+        val factory = SupportFactory(passphrase)
+
         Room.databaseBuilder(
             androidContext(),
             CatalogDatabase::class.java,
             "catalog.db")
             .fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
             .build()
     }
 }
 
 val networkModule = module {
     single {
+        val hostname = "api.themoviedb.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
@@ -53,6 +64,5 @@ val networkModule = module {
 val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
-    factory { AppExecutors() }
-    single<IMainRepository> { MainRepository(get(), get(), get()) }
+    single<IMainRepository> { MainRepository(get(), get()) }
 }

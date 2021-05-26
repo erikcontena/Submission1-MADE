@@ -49,7 +49,7 @@ class FavMovieFragment : Fragment(), ClickItemCallback {
         })
 
 
-        with(binding.rvMovie){
+        with(receiver = binding.rvMovie){
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = movieAdapter

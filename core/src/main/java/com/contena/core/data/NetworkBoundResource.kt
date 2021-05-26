@@ -1,11 +1,10 @@
 package com.contena.core.data
 
 import com.contena.core.data.source.remote.network.ApiResponse
-import com.contena.core.utils.AppExecutors
 import com.contena.core.utils.Resource
 import kotlinx.coroutines.flow.*
 
-abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecutors: AppExecutors) {
+abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private var result : Flow<Resource<ResultType>> = flow{
         emit(Resource.Loading())

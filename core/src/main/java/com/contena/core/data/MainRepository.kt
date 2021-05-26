@@ -8,7 +8,6 @@ import com.contena.core.data.source.remote.response.MovieResponses
 import com.contena.core.data.source.remote.response.TvShowResponses
 import com.contena.core.domain.model.Catalog
 import com.contena.core.domain.repository.IMainRepository
-import com.contena.core.utils.AppExecutors
 import com.contena.core.utils.DataMapper
 import com.contena.core.utils.Resource
 import kotlinx.coroutines.CoroutineScope
@@ -20,12 +19,11 @@ import kotlinx.coroutines.launch
 class MainRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
 ) : IMainRepository {
 
 
     override fun getMovies(query: String): Flow<Resource<List<Catalog>>> =
-        object : NetworkBoundResource<List<Catalog>, List<MovieResponses>>(appExecutors) {
+        object : NetworkBoundResource<List<Catalog>, List<MovieResponses>>() {
             override fun loadFromDB(): Flow<List<Catalog>> =
                 localDataSource.getMovies(query).map {
                     DataMapper.mapEntityMoviesToDomain(it)
@@ -45,7 +43,7 @@ class MainRepository(
         }.asFlow()
 
     override fun getTvShows(query: String): Flow<Resource<List<Catalog>>> =
-        object : NetworkBoundResource<List<Catalog>, List<TvShowResponses>>(appExecutors) {
+        object : NetworkBoundResource<List<Catalog>, List<TvShowResponses>>() {
             override fun loadFromDB(): Flow<List<Catalog>> =
                 localDataSource.getTvShows(query).map {
                     DataMapper.mapEntityTvShowsToDomain(it)
@@ -79,14 +77,11 @@ class MainRepository(
         CoroutineScope(Dispatchers.IO).launch {
             Log.d("TAG", "setFavoriteMovie: INSERT")
             localDataSource.insertMovie(DataMapper.mapDomainMovieToEntity(movie))
-        }
-
-        appExecutors.diskIO().execute {
-            Log.d("TAG", "setFavoriteMovie: UPDATE")
             localDataSource.setFavoriteMovie(
                 DataMapper.mapDomainMovieToEntity(movie)
             )
         }
+
     }
 
 
@@ -95,13 +90,10 @@ class MainRepository(
         CoroutineScope(Dispatchers.IO).launch {
             Log.d("TAG", "setFavoriteTvShow: INSERT")
             localDataSource.insertTvShow((DataMapper.mapDomainTvShowToEntity(tvShow)))
-        }
-        appExecutors.diskIO().execute {
-            Log.d("TAG", "setFavoriteTvShow: UPDATE")
             localDataSource.setFavoriteTvShow(
-                DataMapper.mapDomainTvShowToEntity(tvShow)
-            )
+                DataMapper.mapDomainTvShowToEntity(tvShow))
         }
+
     }
 
     override suspend fun getSearchMovies(query: String): Flow<ApiResponse<List<Catalog>>> =

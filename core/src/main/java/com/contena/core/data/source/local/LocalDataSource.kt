@@ -23,11 +23,10 @@ class LocalDataSource(private val catalogDao: CatalogDao){
     suspend fun insertMovie(movie: MovieEntity) = catalogDao.insertMovie(movie)
     suspend fun  insertTvShow(tvShow: TvShowEntity) = catalogDao.inserrTvShow(tvShow)
 
-    fun setFavoriteMovie(movie : MovieEntity) {
+    suspend fun setFavoriteMovie(movie : MovieEntity) {
         catalogDao.updateFavoriteMovie(movie)
     }
-
-    fun setFavoriteTvShow(tvShow : TvShowEntity) {
+    suspend fun setFavoriteTvShow(tvShow : TvShowEntity) {
         catalogDao.updateFavoriteTvShow(tvShow)
     }
 

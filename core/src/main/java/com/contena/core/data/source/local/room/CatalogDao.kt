@@ -22,7 +22,7 @@ interface CatalogDao {
     suspend fun insertMovie(movie: MovieEntity)
 
     @Update
-    fun updateFavoriteMovie(movie: MovieEntity)
+    suspend fun updateFavoriteMovie(movie: MovieEntity)
 
     //TVSHOW
 
@@ -39,5 +39,5 @@ interface CatalogDao {
     fun getFavoriteTvShows(): Flow<List<TvShowEntity>>
     
     @Update
-    fun updateFavoriteTvShow(tvShow: TvShowEntity)
+    suspend fun updateFavoriteTvShow(tvShow: TvShowEntity)
 }
