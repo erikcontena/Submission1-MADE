@@ -27,14 +27,18 @@ buildscript {
         junitExtversion = '1.1.2'
         espressoVersion = '3.3.0'
         androidXTestVersion = '1.2.0'
+        androidCoreTestVersion = '2.1.0'
+        mockitoVersion = '3.6.0'
+        mockitoKotlinVersion = '2.2.0'
 
         //Coroutine
         kotlin_coroutines_version = "1.4.3"
         lifecycle_version = "2.3.1"
 
         koin_version = "2.1.6"
-
         shimmer_version = "0.5.0"
+
+
     }
     repositories {
         google()
