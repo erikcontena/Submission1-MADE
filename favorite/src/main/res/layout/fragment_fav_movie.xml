@@ -67,6 +67,4 @@
         app:layout_constraintStart_toStartOf="@+id/img_error"
         app:layout_constraintTop_toBottomOf="@+id/img_error" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
