@@ -46,6 +46,12 @@ android {
         viewBinding = true
     }
     dynamicFeatures = [':favorite']
+
+
+//    lintOptions {
+//        // Menonaktikan Issue ID yang disebutkan.
+//        disable 'TypographyFractions', 'TypographyQuotes'
+//    }
 }
 
 dependencies {

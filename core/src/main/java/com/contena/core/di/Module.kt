@@ -30,7 +30,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             CatalogDatabase::class.java,
-            "catalog.db")
+            "catalog_db")
             .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
